@@ -48,6 +48,8 @@ I will also look at Wilf's other ideas such as the extended character set logic,
 I will need to look into how this is done in the ROM or user program, and test this out.
 And one of my follow up ideas will be to design a complete ZX97 computer according to Wilfs original idea in the 1990s years.
 
+Regarding this project, I will start a draft PCB design and put everything on the board, just to be able to judge how much space will be available for integrating some expansions and features.
+
 Kind regards,
 
 Rodney
