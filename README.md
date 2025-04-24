@@ -18,7 +18,7 @@ Right now I have some ATF1508AS CPLDs so I will use these to base this project o
 So the basic computer is done and now I will look around what I will include additionally. Only making a ZX81 type computer is a bit limited so I will look at other things to integrate.
 I will also look at Wilf's other ideas such as the extended character set logic, which I will test shortly.
 I will need to look into how this is done in the ROM or user program, and test this out.
-And one of my ideas is to design a complete ZX97 computer according to Wilfs original idea in the 1990s years.
+And one of my follow up ideas will be to design a complete ZX97 computer according to Wilfs original idea in the 1990s years.
 
 Kind regards,
 
