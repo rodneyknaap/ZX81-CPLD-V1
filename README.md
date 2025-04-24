@@ -2,10 +2,12 @@
 A ZX81 project based on CPLD technology, includes equivalent logic of ZX81 ULA functions based on ZX97Lite.
 
 ![A photo of the hand soldered CPLD prototype using the ZX81 Issue 4 PCB](Img_5525s.jpg)
-Purpose and permitted use, cautions for a potential builder of this design
+
+## Purpose and permitted use, cautions for a potential builder of this design
 This project was created for historical purposes out of love for historical computing designs and for the purpose of enabling computing enthousiasts with a sufficient level of building and troubleshooting expertise to be able to experience the technology by building and troubleshooting the hardware described in this project. Due to the level of this project, it may be suitable as a project for students to get into. If there are any questions from teachers who like to teach about this technology I would be happy to answer them. It may be really interesting to analyse the elaborate and complex CPU timing and 8 bit to 16 bit data byte translation and DMA mechanisms in an educational setting.
 
-Besides the GPL3 license there are a few warnings and usage restrictions applicable: No guarantees of function or fitness for any particular or useful purpose is given, building and using this design is at the sole responsibility of the builder.
+Besides the GPL3 license there are a few warnings and usage restrictions applicable:
+No guarantees of function or fitness for any particular or useful purpose is given, building and using this design is at the sole responsibility of the builder.
 
 Do not attempt this project unless you have the necessary electronics assembly expertise and experience, and know how to observe all electronics safety guidelines which are applicable.
 
@@ -19,7 +21,8 @@ When connecting this system to a computer network which contains stored informat
 
 When building this project, the builder assumes personal responsibility for troubleshooting it and using the necessary care and expertise to make it function properly as defined by the design. You can email me with questions, but I will reply only if I have time and if I find the question to be valid. Which will probably also lead to an update here. I want to primarily dedicate my time to new project development, I am not able to do any user support, so that's why I provide the elaborate info here which will be expanded if needed.
 
-Acknowledgements
+# Acknowledgements
+
 This project was inspired by:
 - Sinclair computers in the 1980s
 - Wilf Righter who helped me with my PCB designs in the 1990s
