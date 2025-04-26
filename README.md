@@ -50,6 +50,20 @@ And one of my follow up ideas will be to design a complete ZX97 computer accordi
 
 Regarding this project, I will start a draft PCB design and put everything on the board, just to be able to judge how much space will be available for integrating some useful expansions and features, or possibly try to make CP/M possible. The most useful form of CP/M would be realized if we could integrate ZX81 video generation in some form into CP/M. If someone is able to assist in this regard, please contact me.
 
+---------------------------------------------
+Update 26-4-2025 to REV0 quartus project zip:
+- updated the polarity of character video stream, set default to ZX81 screen: black characters on white background
+- connected ZX81 keyboard
+- tested more extensively, wrote a few demo programs in BASIC
+- tested on a CRT TV converted to monitor to check SYNC, LOAD and SAVE display if this is showing correctly, which it is
+REV0 is now reasonably well tested
+---------------------------------------------
+Next update(in development):
+- fully decode the I/O ports and retest everything
+- update circuits
+- wire up and test the CHR$128 logic
+- use an external transceiver for the keyboard scanning outputs instead of diodes
+
 Kind regards,
 
 Rodney
