@@ -57,7 +57,7 @@ Update 26-4-2025 to REV0 quartus project zip:
 - tested more extensively, wrote a few demo programs in BASIC
 - tested on a CRT TV converted to monitor to check SYNC, LOAD and SAVE display if this is showing correctly, which it is
 REV0 is now reasonably well tested
-![A screenshot of the Rev0 PCB in progress](ZX81_Issue5_Rev0_PCB_Progress.png)
+
 ---------------------------------------------
 Next update(in development):
 - fully decode the I/O ports and retest everything
