@@ -59,11 +59,52 @@ Update 26-4-2025 to REV0 quartus project zip:
 REV0 is now reasonably well tested
 ![The_PCB_rev_0_design_in_progress](ZX81_Issue5_Rev0_Progress.png)
 ---------------------------------------------
+Update 2-5-2025 to quartus package "002_ZX81_CPLD_CHR$128_WORKING@.zip":
+- CHR$128 is fully working
+- more elaborate I/O decoding (may be removed if this breaks some games)
+- reworked the timing inside the CPLD according to Wilf Rigters ZX97 explanation
+- done more work on analog tape input circuits to support safe line level amplitude loading of programs using the CPLD
+![ZX81/ZX97 video timing diagram based on Wilfs explanation](ZX81_ZX97_video_timing.png)
+According to Wilf explanation we have these timing instances:
+
+1. Each character code (CHR$) byte in DFILE is addressed by the CPU PC, on
+the
+   rising edge T2 data is loaded from DFILE into the 74HC574 : bits 0-5
+   and 7 into 7 bits.
+2. On the falling edge of T2, the NOP circuit forces all CPU data lines to
+zero.
+3. On the rising edge of T3 the low data lines are interpreted by the CPU
+   as a NOP instruction.
+4. During T3/4, the CPU executes the Refresh cycle and ROM address lines are
+   generated with I register on A9-A15, the CHR$ latch on A3-A8, and the
+   ROW counter on address lines A0-A2.
+5. On the rising edge of T1, pattern data from the EPROM is loaded into
+   video shift register and 8 video pixels are shifted out at 6.5MHz
+6. If bit 7 of the CHR$ latch equals 1, then the serial video data is
+inverted.
+7. The CPU increments the program counter and fetches the next character
+code.
+8. This repeats until a HALT is fetched.
+9. HALT opcode bit 6 = 1 and is therefore executed (no NOP)
+10.The SYNC timebase generates a HSYNC pulse independend of the CPU timing
+and
+   the ROW counter is incremented
+11.The halted CPU continues to execute NOPs, incrementing register R and
+   samples the INT input on the rising edge of each T4.
+12.When A6, which is hardwired to INT, goes low during refresh time,
+   (bit 6 of the R reg = 0), the Z80 executes the INT routine (below 32K)
+13.CPU returns from INT and resumes "excution" of DFILE CHR$ codes.
+14.The process repeats 192 times and then INT routine returns to the main
+   video routine, turns on the NMI latch and switches back to the
+   application code.
+---------------------------------------------
+![The current CPLD schematic including CHR$128 UDG support](ZX81_CPLD_schematic_including_CHR$128_support.gif)
+---------------------------------------------
+
 Next update(in development):
-- fully decode the I/O ports and retest everything
-- update circuits
-- wire up and test the CHR$128 logic
 - use an external transceiver for the keyboard scanning outputs instead of diodes
+- taking first steps for supporting CP/M and being able to fully disable all ZX81 related circuits during CP/M runtime (for the moment)
+- performing tests with ZX81 mode enabled and disabled, testing if ZX81 can return in stable manner
 
 Kind regards,
 
