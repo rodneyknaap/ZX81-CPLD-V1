@@ -81,22 +81,24 @@ zero.
 5. On the rising edge of T1, pattern data from the EPROM is loaded into
    video shift register and 8 video pixels are shifted out at 6.5MHz
 6. If bit 7 of the CHR$ latch equals 1, then the serial video data is
-inverted.
+inverted. 
 7. The CPU increments the program counter and fetches the next character
-code.
-8. This repeats until a HALT is fetched.
-9. HALT opcode bit 6 = 1 and is therefore executed (no NOP).
+code. 
+8. This repeats until a HALT is fetched. 
+9. HALT opcode bit 6 = 1 and is therefore executed (no NOP). 
 10.The SYNC timebase generates a HSYNC pulse independend of the CPU timing
-and the ROW counter is incremented.
+and the ROW counter is incremented. 
 11.The halted CPU continues to execute NOPs, incrementing register R and
-   samples the INT input on the rising edge of each T4.
+   samples the INT input on the rising edge of each T4. 
 12.When A6, which is hardwired to INT, goes low during refresh time,
-   (bit 6 of the R reg = 0), the Z80 executes the INT routine (below 32K).
-13.CPU returns from INT and resumes "excution" of DFILE CHR$ codes.
+   (bit 6 of the R reg = 0), the Z80 executes the INT routine (below 32K). 
+13.CPU returns from INT and resumes "excution" of DFILE CHR$ codes. 
 14.The process repeats 192 times and then INT routine returns to the main
    video routine, turns on the NMI latch and switches back to the
-   application code.
+   application code. 
 ---------------------------------------------
+The ZX81 CPLD schematics are currently including CHR$128 support:
+
 ![The current CPLD schematic including CHR$128 UDG support](ZX81_CPLD_schematic_including_CHR$128_support.gif)
 ---------------------------------------------
 
