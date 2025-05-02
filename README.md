@@ -86,14 +86,14 @@ inverted.
 code. 
 8. This repeats until a HALT is fetched. 
 9. HALT opcode bit 6 = 1 and is therefore executed (no NOP). 
-10.The SYNC timebase generates a HSYNC pulse independend of the CPU timing
+10. The SYNC timebase generates a HSYNC pulse independend of the CPU timing
 and the ROW counter is incremented. 
-11.The halted CPU continues to execute NOPs, incrementing register R and
+11. The halted CPU continues to execute NOPs, incrementing register R and
    samples the INT input on the rising edge of each T4. 
-12.When A6, which is hardwired to INT, goes low during refresh time,
+12. When A6, which is hardwired to INT, goes low during refresh time,
    (bit 6 of the R reg = 0), the Z80 executes the INT routine (below 32K). 
-13.CPU returns from INT and resumes "excution" of DFILE CHR$ codes. 
-14.The process repeats 192 times and then INT routine returns to the main
+13. CPU returns from INT and resumes "excution" of DFILE CHR$ codes. 
+14. The process repeats 192 times and then INT routine returns to the main
    video routine, turns on the NMI latch and switches back to the
    application code. 
 ---------------------------------------------
