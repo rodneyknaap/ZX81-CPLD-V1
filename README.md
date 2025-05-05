@@ -101,11 +101,38 @@ The ZX81 CPLD schematics are currently including CHR$128 support:
 
 ![The current CPLD schematic including CHR$128 UDG support](ZX81_CPLD_schematic_including_CHR$128_support.gif)
 ---------------------------------------------
+Update 5-5-2025:
+I have added CP/M memory management and the following devices (so far) to the PCB:
+- 512KB ROM for ROMWBW HBIOS and CP/M
+- 1MB of dedicated SRAM for running CP/M
+- 128KB SRAM chip and 27C256 socket for the ZX81 RAM and ROM
+- Floppy drive controller
+- PPIDE interface
+- ACIA serial commmunications adapter
+- USB to Serial input for PC
+- RTC chip Dallas
+
+These devices all can be mapped into the ZX81 I/O map for future developers, including the RAM and bank switching memory currently used by CP/M
+After confirming basic operation of the PCB, I will map all the devices in ZX81 mode and check that they don't interfere with the ZX81 operation
+
+---------------------------------------------
+![The updated PCB layout after adding some CP/M devices](ZX81_CPM_PCB.png)
+
+---------------------------------------------
+
+The CP/M environment is able to be controlled from a USB cable using any PC and terminal software like putty.
+In the CP/M environment it's my intention to make a mechanism possible to load the ZX81 RAM contents, and then reset the system and switch back to running in ZX81 mode.
+Possibly, ZX81 program development could be done from within the CP/M environment and this allows access to the ZX81 for testing. When switching back from CP/M to ZX81 mode, the ZX81 memory map is able to be fully featured using RAM only, shadowing the ZX81 ROM, which also allows for experimentation using modified or other ROM software in ZX81 mode.
+Hopefully this could provide more freedom for experimentation in software and hardware.
 
 Next update(in development):
+- increase the PCB size to what will fit the case so more expansions can be included inside the original ZX81 case 
+- testing with A6 to /INT being featured inside the CPLD during ZX81 mode
 - use an external transceiver for the keyboard scanning outputs instead of diodes
-- taking first steps for supporting CP/M and being able to fully disable all ZX81 related circuits during CP/M runtime (for the moment)
 - performing tests with ZX81 mode enabled and disabled, testing if ZX81 can return in stable manner
+- looking at autostarting basic version of ZX81 ROM as done by Wilf Rigter in his ZX97 so that a Z80 RESET will not erase the ZX81 contents
+- elaborating the circuits to include the audio connectors, small size USB connector for PC access to CP/M
+- adding Wilf Rigters solution for fast PC <-> ZX file transfer and control
 
 Kind regards,
 
