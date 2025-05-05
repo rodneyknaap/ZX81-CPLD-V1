@@ -135,6 +135,7 @@ Next update(in development):
 - possibly adding Wilf Rigters solution for fast PC <-> ZX parallel port file transfer and control
 - adding faster clock input enabling to switch to higher clock rates in future development
 - reducing occupied CPLD pins to enable a maximum level of development in the CPLD logic
+- retesting CP/M floppy drive interface to check if DMA ACK input is necessary for the operation
 
 Kind regards,
 
