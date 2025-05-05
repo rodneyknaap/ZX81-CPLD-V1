@@ -1,5 +1,5 @@
 # ZX81-CPLD-V1
-A ZX81 project based on CPLD technology, includes equivalent logic of ZX81 ULA functions based on ZX97Lite.
+A ZX81 project based on CPLD technology, includes equivalent logic of ZX81 ULA functions based on ZX97Lite and combines ZX81 operation with ROMWBW compatible HBIOS and CP/M mode.
 
 ![A photo of the hand soldered CPLD prototype using the ZX81 Issue 4 PCB](Img_5525s.jpg)
 
