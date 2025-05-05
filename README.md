@@ -133,6 +133,8 @@ Next update(in development):
 - looking at autostarting basic version of ZX81 ROM as done by Wilf Rigter in his ZX97 so that a Z80 RESET will not erase the ZX81 RAM contents
 - elaborating the circuits to include the audio connectors, small size USB connector for PC access to CP/M
 - possibly adding Wilf Rigters solution for fast PC <-> ZX parallel port file transfer and control
+- adding faster clock input enabling to switch to higher clock rates in future development
+- reducing occupied CPLD pins to enable a maximum level of development in the CPLD logic
 
 Kind regards,
 
