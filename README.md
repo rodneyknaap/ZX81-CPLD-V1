@@ -130,9 +130,9 @@ Next update(in development):
 - testing with A6 to /INT being featured inside the CPLD during ZX81 mode
 - use an external transceiver for the keyboard scanning outputs instead of diodes
 - performing tests with ZX81 mode enabled and disabled, testing if ZX81 can return in stable manner
-- looking at autostarting basic version of ZX81 ROM as done by Wilf Rigter in his ZX97 so that a Z80 RESET will not erase the ZX81 contents
+- looking at autostarting basic version of ZX81 ROM as done by Wilf Rigter in his ZX97 so that a Z80 RESET will not erase the ZX81 RAM contents
 - elaborating the circuits to include the audio connectors, small size USB connector for PC access to CP/M
-- adding Wilf Rigters solution for fast PC <-> ZX file transfer and control
+- possibly adding Wilf Rigters solution for fast PC <-> ZX parallel port file transfer and control
 
 Kind regards,
 
