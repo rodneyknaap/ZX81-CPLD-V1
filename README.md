@@ -27,6 +27,8 @@ This project was inspired by:
 - Sinclair computers in the 1980s
 - Wilf Rigter who helped me with my PCB designs in the 1990s
 - the German ZX-Team who inspired me a lot by sending me their Magazin and kind letters and messages. Particularly Peter Liebert Adelt and Kai Fischer with whom I have had very pleasant and memorable contact in the 1990s years.
+- Gary Kildall who invented CP/M, the concept of splitting the BIOS from software operation and so much more
+- Wayne Warthen who created and manages the ROMWBW CP/M project development which is part of the basis of this project
 
 # Concept of the project
 Mostly in the 1990s I made some PCB designs for building your own ZX81. Since then I am also working on 286 PC based projects, preparing to create a 486 PC design without using any commercial chipset. After doing more advanced work on the 286 system, I had another look at my old projects, and plan to publish some of them in open source form.
@@ -39,16 +41,9 @@ The CPLD is connected in a similar fashion as the Sinclair ULA chip, which means
 
 So after debugging the timing, I was able to run the CPLD based ZX81 computer from the Dn databus only, and this frees up 8 more pins to be able to put these to good use for other functions for expanding the ZX81 computer. What I did was first to have the CPLD on both the Dn and Dn' bus, and then moving sections onto the Dn bus only, and solving the problems which were then occurring as described above. I did some tweaking of the serial video stream sync logic to line up the vertical lines a bit more straight, but for now I will wait with these kind of modifications when I have a decent PCB made so we will have the real impedance of all the traces and logic, and then I will look at what needs some tweaking in the CPLD, if any.
 
-One of the future goals of this recent ZX81 work may become to be able to run CP/M in some form on this computer. So we will need to be able to juggle the memory decoding around in order to exchange ROM for RAM and start CP/M. I am not a programmer(yet) so I will need to look into how we can load and run CP/M. Of course, running in memory is one thing, however doing more such as CP/M DOS operations on a harddisk or floppy drive, interacting with the user etc will require some form of console. Right now it's just an idea which I am looking into. CP/M will be better if we have more RAM available so I may look into some bank switching logic. This may require some register TTL IC since the CPLD is not great in terms of how many register bits you can store inside it.
+One of the next goals of this recent ZX81 work is to be able to run CP/M on this computer as an operating system. So we will need to be able to juggle the memory decoding around in order to exchange ROM for RAM and start CP/M. I am not a programmer(yet) so I will need to look into how we can load and run CP/M. Of course, running in memory is one thing, however doing more such as CP/M DOS operations on a harddisk or floppy drive, interacting with the user etc will require a console. CP/M will be better if we have more RAM available so bank switching logic needs to be included. This require some external TTL IC registers since the CPLD is not great in terms of how many register bits you can store inside it.
 
-Right now I have some ATF1508AS CPLDs so I will use these to base this project on. Probably I will directly solder the chip on the PCB for stability reasons. Sockets are really not so great for any computer because they are likely to introduce contact based malfunctions especially if we only can obtain low quality stuff these days.
-
-So the basic computer is done and now I will look around what I will include additionally. Only making a ZX81 type computer is a bit limited so I will look at other things to integrate.
-I will also look at Wilf's other ideas such as the extended character set logic, which I will test shortly.
-I will need to look into how this is done in the ROM or user program, and test this out.
-And one of my follow up ideas will be to design a complete ZX97 computer according to Wilfs original idea in the 1990s years.
-
-Regarding this project, I will start a draft PCB design and put everything on the board, just to be able to judge how much space will be available for integrating some useful expansions and features, or possibly try to make CP/M possible. The most useful form of CP/M would be realized if we could integrate ZX81 video generation in some form into CP/M. If someone is able to assist in this regard, please contact me.
+I have some ATF1508AS CPLD chips so this project is based on this CPLD type. We will directly solder the chip on the PCB for stability reasons. Sockets are really not so great for any computer because they are likely to introduce contact based malfunctions especially if we only can obtain low quality stuff these days.
 
 ---------------------------------------------
 Update 26-4-2025 to REV0 quartus project zip:
@@ -97,7 +92,7 @@ and the ROW counter is incremented.
    video routine, turns on the NMI latch and switches back to the
    application code. 
 ---------------------------------------------
-The ZX81 CPLD schematics are currently including CHR$128 support:
+The ZX81 CPLD quartus schematics are currently including CHR$128 support:
 
 ![The current CPLD schematic including CHR$128 UDG support](ZX81_CPLD_schematic_including_CHR$128_support.gif)
 ---------------------------------------------
@@ -125,17 +120,70 @@ In the CP/M environment it's my intention to make a mechanism possible to load t
 Possibly, ZX81 program development could be done from within the CP/M environment and this allows access to the ZX81 for testing. When switching back from CP/M to ZX81 mode, the ZX81 memory map is able to be fully featured using RAM only, shadowing the ZX81 ROM, which also allows for experimentation using modified or other ROM software in ZX81 mode.
 Hopefully this could provide more freedom for experimentation in software and hardware.
 
-Next update(in development):
-- increase the PCB size to what will fit the case so more expansions can be included inside the original ZX81 case 
-- testing with A6 to /INT being featured inside the CPLD during ZX81 mode
-- use an external transceiver for the keyboard scanning outputs instead of diodes
+# Update 18-5-2025
+The schematic and PCB layout are now finished. 
+Please note the following things: 
+- the design set can be downloaded, please see all the files named "Issue5 REV 1" for the entire project set
+- nothing is verified, if anyone builds this project they should only do this if they are confident to be able to solve any problems for themselves. After I have had time to build and verify this design myself I will update the relevant information here.
+- the quartus project is a first draft which is in the current condition before any testing is done
+- the quartus CPLD programming will be under development and subject to lots of changes after I build the REV1 PCB with the goal to develop a higher level of interaction between the ZX81 hardware and the CP/M operating system
+
+I will confirm a version of quartus programming after I have a fully built PCB for testing and have had sufficient time to establish a certain level of basic functionality according to the initial design as created. 
+
+After establishing a basic level of functionality and mode switching between ZX81 and CP/M mode, the functionality can be developed to a much higher degree. Since a CPLD is at the core of this computer, everything can be reprogrammed such as:
+- supported devices connected in ZX81 mode
+- IO port numbers can be chose separately in CP/M mode and ZX81 mode if needed
+- memory paging system of ROMWBW could be extended into ZX81 mode support
+- the 128KB SRAM used for ZX81 memory can be enabled with software development to support 128KB in ZX81 mode
+- cycle decoding state machine could be created to differentiate between ZX81 video display generation and normal processing
+- the state machine could then be used to switch the Z80 CPU to a higher clock speed in ZX81 mode
+
+The idea is that we can boot CP/M using ROMWBW, and CP/M offers the operating system and file system. Software can be developed in CP/M to load the ZX81 RAM contents from a file in CP/M, and then mode switch back to ZX81 mode and run the software from there. A further plan is to be able to return to ZX81 mode after setting a register bit, which enables the entire Z80 memory map to be filled with the SRAM. The ROM section can be preloaded into RAM in order to use the ZX81 ROM code, or other custom code could be loaded instead of the ZX81 ROM.
+
+A further development could be that we enable ROMWBW page mode memory in ZX81 mode as well. The entire 128KB ZX81 RAM is able to be page mapped if this is so desired, and these 8 16KB pages are all ZX81 display capable. If need be, we can also enable this with all other SRAMs on the board, which needs only to lift a few OE pins and connect them to the solder pads of the correct /RAMCE signals which are included on the PCB. I have not done this by default because it needs to be tested if this causes any problems with CP/M, which I don't expect. On the other hand, we could leave the ZX81 display memory page as-is and page map the rest of the Z80 memory range for any ZX81 program to use.
+
+A few updates of what has been verified in testing on the hand wired prototype to be fully functional:
+- running the A6 to INT connection from within the CPLD
+- using external transceivers for NOP and keyboard ports
+
+The PCB has been increased in size so we can fit more devices into the ZX81 case.
+Please note: the space is very tight inside a ZX81. So we will need to verify and confirm that everything is able to fit and be connected as designed. Especially underneath the keyboard area for example, there is only limited height of components able to fit. Connecting the floppy drive flatcable may need some improvisation as well, for example.
+
+Further additions are now included:
+- Wilf Rigter PZ97 port using a 8255 and parallel port connector and more
+- tape save/load connector
+- USB type B UART input connector using CH340N USB to serial chip
+- power output header inside case
+- PZ97 8255 Port B connects to separate header including power pins at back of case for custom I/O development
+- CH375 universal USB controller chip added with a USB A socket at back right of the case
+- CP/M RAM is now 1,5 MB
+- CP/M ROM is 512KB, with jumper for updating from within CP/M
+- ZX81 128KB SRAM is wired for full page mapping support depending on development and CPLD configuration for how this operates
+- RESET of system is bidirectional on the CPLD, experimental and subject to testing first
+- ZX81 ROM is 64KB W27C512 chip, which amounts to 8x the ZX81 ROM size, 3 jumper positions available on the PCB for selection of the ROM page
+- tape I/O is now intended to be line level (2V amplitude) which has been verified for tape loading into the ZX81 using 2 stage transistor circuit to increase amplitude to full 5V for the serial tape load input. Save circuit will be tested and values/population of parts will be updated here.
+- we have a FCLOCK input on the CPLD for providing a faster clock source for development purposes
+- FCLOCK could be supplied with 7.3728MHz with a jumper or manually wired to 16MHz oscillator for FDC, for example
+
+Because we have the CPLD, the entire system is able to be reconfigured in many ways, if needed. This is the goal of the entire schematic to enable as many reconfiguration options as possible in the system.
+
+# Future concepts and potential envisioned for this computer
+After software has been developed for supporting various functions in ZX81 mode, all the hardware control in the computer is able to be updated in the CPLD for offering more and more devices to be used in ZX81 mode, which can be done at alternate IO ports in ZX81 mode if required to avoid conflicts with ZX81 operation. 
+
+The ZX81 uses a Z80 as a CRT controller which is a brilliant design. This concept has the potential for providing CRT display for other purposes, and with this computer concept, there would be the idea to support the ZX81 display system and keyboard scanning routine within CP/M, thus creating a true CP/M console which makes use of the ZX81 display and keyboard. Which would be one of the coolest ideas of what we could do with this computer design. For realizing this, some CP/M BIOS driver code would be needed by developing this within the ROMWBW system using Z80 assembler. This is an advanced goal for this project. If anyone who is interested in this project feels capable to program such functions, please get in touch with me so we can plan to work on this together. I would be able to offer the CPLD reconfiguration necessary to provide initializing the ZX81 display in CP/M mode. We could use high resolution tricks used in ZX81 programs for generating a higher resolution console screen. Also a larger character set is possible using UDG. We could create an ASCII equivalent etc as needed.
+If there is no interest, I will try to do some development myself, though I have a lot of hardware development scheduled in the near future first, see the other projects.
+
+These ideas illustrate how much fun it can be to develop things on a ZX81, and that a ZX81 is able to be developed further into a much more functional computer which is able to provide more PC-alike level of operation thanks to CP/M. Using a ZX81 display and keyboard CP/M console would be an amazing concept to realize and a valuable addition for the ZX81 enthusiast community. I have also seen some interest in the RC2014 community where attempts have been made to add a ZX81 module to the system. This project may aid in this goal as well.
+
+A few items for the future:
+- finding a CP/M developer interested in this project to create CP/M software and drivers to support the system
 - performing tests with ZX81 mode enabled and disabled, testing if ZX81 can return in stable manner
 - looking at autostarting basic version of ZX81 ROM as done by Wilf Rigter in his ZX97 so that a Z80 RESET will not erase the ZX81 RAM contents
-- elaborating the circuits to include the audio connectors, small size USB connector for PC access to CP/M
-- possibly adding Wilf Rigters solution for fast PC <-> ZX parallel port file transfer and control
-- adding faster clock input enabling to switch to higher clock rates in future development
-- reducing occupied CPLD pins to enable a maximum level of development in the CPLD logic
-- retesting CP/M floppy drive interface to check if DMA ACK input is necessary for the operation
+
+So please note: no prototype PCB has been built yet, so keep in mind the above warnings and remember that nothing is verified yet and this is the first revision of this new system design. I am sharing the designs in unverified state for providing interested readers an early look into the project. Deciding to build this please consider your skills and ability if you are confident to be able to do this yourself. Soldering should start with parts needed to be able to power up, erase and program the CPLD without any other parts, thus making sure that a recycled CPLD can not generate any contention with the other ICs and damage due to contention can be prevented. So any actual builder should plan such things carefully.
+Next step could be to add the ZX81 parts, programming the CPLD and placing the ZX81 mode jumper. This is an initial test to verify the ZX81 components of the computer before adding the rest. See the schematic which can give clues to which parts are needed for creating the ZX81 operations.
+
+Updates will follow as soon as I have ordered the PCB to be made and had the chance to build and test everything.
 
 Kind regards,
 
