@@ -120,8 +120,10 @@ In the CP/M environment it's my intention to make a mechanism possible to load t
 Possibly, ZX81 program development could be done from within the CP/M environment and this allows access to the ZX81 for testing. When switching back from CP/M to ZX81 mode, the ZX81 memory map is able to be fully featured using RAM only, shadowing the ZX81 ROM, which also allows for experimentation using modified or other ROM software in ZX81 mode.
 Hopefully this could provide more freedom for experimentation in software and hardware.
 
+---------------------------------------------
+
 # Update 18-5-2025
-The schematic and PCB layout are now finished. 
+The schematic and dual-layer PCB layout are now finished. 
 Please refer to the files named ZX81_ISSUE_5_REV1 for the relevant information used to develop the design.
 Which will include a copy of the quartus project used as a basis. 
 Status of this design: development concept for manufacturing purposes only, unverified and under test/further development!
@@ -134,8 +136,12 @@ For the ZX81 ROM we can use a standard 8KB ZX81 ROM as found on the internet. Pl
 ![Top view of the PCB](ZX81_Issue5_Rev1_CMP1.png)
 A picture of the ZX81 Issue 5 PCB
 
+---------------------------------------------
+
 ![Bottom view of the PCB](ZX81_Issue5_Rev1_back_cmp1.png)
 The reverse side of the PCB showing the bottom SMD components.
+
+---------------------------------------------
 
 Please note the following things: 
 - the design set can be downloaded, please see all the files named "Issue5 REV 1" for the entire project set
@@ -157,12 +163,18 @@ The idea is that we can boot CP/M using ROMWBW, and CP/M offers the operating sy
 
 A further development could be that we enable ROMWBW page mode memory in ZX81 mode as well. The entire 128KB ZX81 RAM is able to be page mapped if this is so desired, and these 8 16KB pages are all ZX81 display capable. If need be, we can also enable this with all other SRAMs on the board, which needs only to lift a few OE pins and connect them to the solder pads of the correct /RAMCE signals which are included on the PCB. I have not done this by default because it needs to be tested if this causes any problems with CP/M, which I don't expect. On the other hand, we could leave the ZX81 display memory page as-is and page map the rest of the Z80 memory range for any ZX81 program to use.
 
+---------------------------------------------
+
 A few updates of what has been verified in testing on the hand wired prototype to be fully functional:
 - running the A6 to INT connection from within the CPLD
 - using external transceivers for NOP and keyboard ports
 
+---------------------------------------------
+
 The PCB has been increased in size so we can fit more devices into the ZX81 case.
 Please note: the space is very tight inside a ZX81. So we will need to verify and confirm that everything is able to fit and be connected as designed. Especially underneath the keyboard area for example, there is only limited height of components able to fit. Connecting the floppy drive flatcable may need some improvisation as well, for example.
+
+---------------------------------------------
 
 Further additions are now included:
 - Wilf Rigter PZ97 port using a 8255 and parallel port connector and more
@@ -182,6 +194,8 @@ Further additions are now included:
 
 Because we have the CPLD, the entire system is able to be reconfigured in many ways, if needed. This is the goal of the entire schematic to enable as many reconfiguration options as possible in the system.
 
+---------------------------------------------
+
 # Future concepts and potential envisioned for this computer
 After software has been developed for supporting various functions in ZX81 mode, all the hardware control in the computer is able to be updated in the CPLD for offering more and more devices to be used in ZX81 mode, which can be done at alternate IO ports in ZX81 mode if required to avoid conflicts with ZX81 operation. 
 
@@ -190,10 +204,14 @@ If there is no interest, I will try to do some development myself, though I have
 
 These ideas illustrate how much fun it can be to develop things on a ZX81, and that a ZX81 is able to be developed further into a much more functional computer which is able to provide more PC-alike level of operation thanks to CP/M. Using a ZX81 display and keyboard CP/M console would be an amazing concept to realize and a valuable addition for the ZX81 enthusiast community. I have also seen some interest in the RC2014 community where attempts have been made to add a ZX81 module to the system. This project may aid in this goal as well.
 
+---------------------------------------------
+
 A few items for the future:
 - finding a CP/M developer interested in this project to create CP/M software and drivers to support the system
 - performing tests with ZX81 mode enabled and disabled, testing if ZX81 can return in stable manner
 - looking at autostarting basic version of ZX81 ROM as done by Wilf Rigter in his ZX97 so that a Z80 RESET will not erase the ZX81 RAM contents
+
+---------------------------------------------
 
 So please note: no prototype PCB has been built yet, so keep in mind the above warnings and remember that nothing is verified yet and this is the first revision of this new system design. I am sharing the designs in unverified state for providing interested readers an early look into the project. Deciding to build this please consider your skills and ability if you are confident to be able to do this yourself. Soldering should start with parts needed to be able to power up, erase and program the CPLD without any other parts, thus making sure that a recycled CPLD can not generate any contention with the other ICs and damage due to contention can be prevented. So any actual builder should plan such things carefully.
 Next step could be to add the ZX81 parts, programming the CPLD and placing the ZX81 mode jumper. This is an initial test to verify the ZX81 components of the computer before adding the rest. See the schematic which can give clues to which parts are needed for creating the ZX81 operations.
