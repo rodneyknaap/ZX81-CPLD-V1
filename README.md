@@ -122,6 +122,15 @@ Hopefully this could provide more freedom for experimentation in software and ha
 
 # Update 18-5-2025
 The schematic and PCB layout are now finished. 
+Please refer to the files named ZX81_ISSUE_5_REV1 for the relevant information used to develop the design.
+Which will include a copy of the quartus project used as a basis. 
+Status of this design: development concept for manufacturing purposes only, unverified and under test/further development!
+My purpose is sharing my work openly with everyone who is interested, however I don't have time for doing interactive support for other builders who also like to repeat this work.
+I will share as much relevant and useful information as I am able to here in the project page.
+Don't build this unless you are confident of your own skills and debugging ability to be able to achieve this independently.
+
+For the ZX81 ROM we can use a standard 8KB ZX81 ROM as found on the internet. Placing three jumpers on J30 selects the lowest bank on the W27C512.
+
 ![Top view of the PCB](ZX81_Issue5_Rev1_CMP1.png)
 A picture of the ZX81 Issue 5 PCB
 
