@@ -122,10 +122,10 @@ Hopefully this could provide more freedom for experimentation in software and ha
 
 # Update 18-5-2025
 The schematic and PCB layout are now finished. 
-![Top view of the PCB](ZX81_Issue5_Rev1_CMP.png)
+![Top view of the PCB](ZX81_Issue5_Rev1_CMP1.png)
 A picture of the ZX81 Issue 5 PCB
 
-![Bottom view of the PCB](ZX81_Issue5_Rev1_back_cmp.png)
+![Bottom view of the PCB](ZX81_Issue5_Rev1_back_cmp1.png)
 The reverse side of the PCB showing the bottom SMD components.
 
 Please note the following things: 
