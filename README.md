@@ -145,6 +145,8 @@ A picture of the ZX81 Issue 5 PCB
 ![Bottom view of the PCB](ZX81_Issue5_Rev1_back_cmp1.png)  
 
 The reverse side of the PCB showing the bottom SMD components.
+(The bottom silkscreen would cause the PCB manufacturing to be much more expensive, so I have created a PDF printout where the references and values are printed.
+So the bottom printout has been optimized for this purpose, which will obscure some of the bottom silkscreen because in the PDF it is printed in the pad location for clarity.)
 
 ---------------------------------------------
 
