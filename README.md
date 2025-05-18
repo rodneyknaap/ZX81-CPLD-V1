@@ -133,12 +133,14 @@ Don't build this unless you are confident of your own skills and debugging abili
 
 For the ZX81 ROM we can use a standard 8KB ZX81 ROM as found on the internet. Placing three jumpers on J30 selects the lowest bank on the W27C512.
 
-![Top view of the PCB](ZX81_Issue5_Rev1_CMP1.png)
+![Top view of the PCB](ZX81_Issue5_Rev1_CMP1.png).
+
 A picture of the ZX81 Issue 5 PCB
 
 ---------------------------------------------
 
-![Bottom view of the PCB](ZX81_Issue5_Rev1_back_cmp1.png)
+![Bottom view of the PCB](ZX81_Issue5_Rev1_back_cmp1.png).
+
 The reverse side of the PCB showing the bottom SMD components.
 
 ---------------------------------------------
