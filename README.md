@@ -4,7 +4,7 @@ A ZX81 project based on CPLD technology, includes equivalent logic of ZX81 ULA f
 ![A photo of the hand soldered CPLD prototype using the ZX81 Issue 4 PCB](Img_5525s.jpg)
 
 ## Purpose and permitted use, cautions for a potential builder of this design
-This project was created for historical purposes out of love for historical computing designs and for the purpose of enabling computing enthousiasts with a sufficient level of building and troubleshooting expertise to be able to experience the technology by building and troubleshooting the hardware described in this project. Due to the level of this project.
+This project was created for historical purposes out of love for historical computing designs and for the purpose of enabling computing enthousiasts with a sufficient level of building and troubleshooting expertise to be able to experience the technology by building and troubleshooting the hardware described in this project.
 
 Besides the GPL3 license there are a few warnings and usage restrictions applicable:
 No guarantees of function or fitness for any particular or useful purpose is given, building and using this design is at the sole responsibility of the builder.
