@@ -214,10 +214,10 @@ I have taken one last look at the whole design before ordering the PCB and made 
 
 Right now I am working on optimizing the traces in the new layout, and this will be the layout I am now going to upload to JLCPCB for manufacturing.
 ---------------------------------------------
-![Top view of the PCB](ZX81_Issue5_Rev1_CMP1.png)  
+![Top view of the PCB](ZX81_ISSUE5_REV1D.png)  
 
 ---------------------------------------------
-![Bottom view of the PCB](ZX81_Issue5_Rev1_CMP1.png)  
+![Bottom view of the PCB](ZX81_ISSUE5_REV1D_BACK.png)  
 
 ---------------------------------------------
 
