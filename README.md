@@ -201,6 +201,24 @@ Further additions are now included:
 
 Because we have the CPLD, the entire system is able to be reconfigured in many ways, if needed. This is the goal of the entire schematic to enable as many reconfiguration options as possible in the system.
 
+# Update 3-8-2025
+I have taken one last look at the whole design before ordering the PCB and made a few additional changes. Because I wanted to be able to do more things which previously were not possible because of not having enough pins on the CPLD. I exchanged the CPLD type for a 100 pin package so this added a number of additional pins, with which I have made the following additions:
+- the CPLD is now generating all memory chip selects. So the memory configuration is able to be completely changed. The external page register chips are still used because of CPLD register limitations.
+- the CPLD now outputs MA14, MA15 and MA16 to the ZX RAM chip during ZX81 mode. This means that some form of memory page swapping would be possible within the 8 available 16KB pages that the ZX SRAM contains so theoretically the ZX81 mode could make use of 128KB of SRAM.
+- the 1.5MB of CP/M memory would theoretically also be available for use in ZX81 mode if there is some application that could make use of this.
+- the clock inputs now are expanded: we have 6.5MHz for ZX81 mode display generation, 7.3728MHz for CP/M mode of the Z80, and we have the FCLOCK input which could be connected with the onboard 16MHz clock for example.
+- the clock output on the expansion port is now a separate output pin of the CPLD so basically anything is possible to be programmed to this output, so that even when the CPU is dynamically clocked, this output would be able to maintain the same clock speed throughout. Otherwise this pin could be used for custom designs on the expansion port as well since it's completely reprogrammable.
+- a 555 timer is added on the PCB. This timer will supply a lower frequency pulse to the CPLD which can be used for various purposes, one of which will be a reset timer. A new RESET circuit will allow the CPLD to apply a suitable amount of RESET time to the whole computer whenever needed, for example after loading new data into the ZX81 RAM during CP/M mode so that the program can be automatically started.
+- a speaker output has been added with a simple transistor output stage for driving a small speaker. This allows experimentation with sound such as generating tones and sound effects.
+- the secondary floppy controller I/O decoder has been moved into the CPLD. This means that the floppy drive controller chip port addresses can be reconfigured to any port address, possibly replicating an existing floppy controller for the ZX81 for which software may exist, for example.  
+
+Right now I am working on optimizing the traces in the new layout, and this will be the layout I am now going to upload to JLCPCB for manufacturing.
+---------------------------------------------
+![Top view of the PCB](ZX81_Issue5_Rev1_CMP1.png)  
+
+---------------------------------------------
+![Bottom view of the PCB](ZX81_Issue5_Rev1_CMP1.png)  
+
 ---------------------------------------------
 
 # Future concepts and potential envisioned for this computer
