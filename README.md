@@ -161,6 +161,8 @@ I have seen some interest in the RC2014 community for the ZX81 where attempts ha
 ---------------------------------------------  
 # 3-8-2025: PCB has been ordered from JLCPCB  
 
+![Image of ordered PCB](ZX81_Issue5_JLCPCB_ORDER.png)  
+
 After receiving the PCB I will work on assembly and testing.
 
 I will document the assembly and programming process here in more detail so it could possibly be repeated by enthusiasts who are able to do this type of PCB assembly/programming work using the information I am providing here.
