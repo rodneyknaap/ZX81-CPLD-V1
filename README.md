@@ -194,7 +194,7 @@ I have taken one last look at the whole design before ordering the PCB and made 
 - a speaker output has been added with a simple transistor output stage for driving a small speaker. This allows experimentation with sound such as generating tones and sound effects.
 - the secondary floppy controller I/O decoder has been moved into the CPLD. This means that the floppy drive controller chip port addresses can be reconfigured to any port address, possibly replicating an existing floppy controller for the ZX81 for which software may exist, for example.  
 
-Right now I am working on optimizing the traces in the new layout, and this will be the layout I am now going to upload to JLCPCB for manufacturing.
+The PCB design is finished and the PCB has been ordered from JLCPCB.
 ---------------------------------------------
 ![Top view of the PCB](ZX81_ISSUE5_REV1D.png)  
 
@@ -203,24 +203,20 @@ Right now I am working on optimizing the traces in the new layout, and this will
 
 ---------------------------------------------
 
-# Future concepts and potential envisioned for this computer
-After software has been developed for supporting various functions in ZX81 mode, all the hardware control in the computer is able to be updated in the CPLD for offering more and more devices to be used in ZX81 mode, which can be done at alternate IO ports in ZX81 mode if required to avoid conflicts with ZX81 operation. 
+# Future concepts and potential functionality of this computer
+If software could be developed for supporting various functions in ZX81 mode, all the hardware control in the computer is able to be updated in the CPLD for offering more and more devices to be used in ZX81 mode, which can be done at alternate IO ports in ZX81 mode if required to avoid conflicts with ZX81 operation. 
 
-The ZX81 uses a Z80 as a CRT controller which is a brilliant design. This concept has the potential for providing CRT display for other purposes, and with this computer concept, there would be the idea to support the ZX81 display system and keyboard scanning routine within CP/M, thus creating a true CP/M console which makes use of the ZX81 display and keyboard. Which would be one of the coolest ideas of what we could do with this computer design. For realizing this, some CP/M BIOS driver code would be needed by developing this within the ROMWBW system using Z80 assembler. This is an advanced goal for this project. If anyone who is interested in this project feels capable to program such functions, please get in touch with me so we can plan to work on this together. I would be able to offer the CPLD reconfiguration necessary to provide initializing the ZX81 display in CP/M mode. We could use high resolution tricks used in ZX81 programs for generating a higher resolution console screen. Also a larger character set is possible using UDG. We could create an ASCII equivalent etc as needed.
-If there is no interest, I will try to do some development myself, though I have a lot of hardware development scheduled in the near future first, see the other projects.
-
-These ideas illustrate how much fun it can be to develop things on a ZX81, and that a ZX81 is able to be developed further into a much more functional computer which is able to provide more PC-alike level of operation thanks to CP/M. Using a ZX81 display and keyboard CP/M console would be an amazing concept to realize and a valuable addition for the ZX81 enthusiast community. I have also seen some interest in the RC2014 community where attempts have been made to add a ZX81 module to the system. This project may aid in this goal as well.
+I have seen some interest in the RC2014 community where attempts have been made to add a ZX81 module to the system, the status of that work is not clear at the moment.
 
 ---------------------------------------------
 
-A few items for the future:
-- finding a CP/M developer interested in this project to create CP/M software and drivers to support the system
+A few things which I will test in the future:
 - performing tests with ZX81 mode enabled and disabled, testing if ZX81 can return in stable manner
 - looking at autostarting basic version of ZX81 ROM as done by Wilf Rigter in his ZX97 so that a Z80 RESET will not erase the ZX81 RAM contents
 
 ---------------------------------------------
 
-So please note: no prototype PCB has been built yet, so keep in mind the above warnings and remember that nothing is verified yet and this is the first revision of this new system design. I am sharing the designs in unverified state for providing interested readers an early look into the project. Deciding to build this please consider your skills and ability if you are confident to be able to do this yourself. Soldering should start with parts needed to be able to power up, erase and program the CPLD without any other parts, thus making sure that a recycled CPLD can not generate any contention with the other ICs and damage due to contention can be prevented. So any actual builder should plan such things carefully.
+Please note: no prototype PCB has been built yet, so keep in mind the above warnings and remember that nothing is verified yet and this is the first revision of this new system design. I am sharing the designs in unverified state for providing interested readers an early look into the project. Deciding to build this please consider your skills and ability if you are confident to be able to do this yourself. Soldering should start with parts needed to be able to power up, erase and program the CPLD without any other parts, thus making sure that a recycled CPLD can not generate any contention with the other ICs and damage due to contention can be prevented. So any actual builder should plan such things carefully.
 Next step could be to add the ZX81 parts, programming the CPLD and placing the ZX81 mode jumper. This is an initial test to verify the ZX81 components of the computer before adding the rest. See the schematic which can give clues to which parts are needed for creating the ZX81 operations.
 
 Updates will follow as soon as I have ordered the PCB to be made and had the chance to build and test everything.
