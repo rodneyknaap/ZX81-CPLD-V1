@@ -156,13 +156,14 @@ After I have had time to build and verify this design myself I will update a lot
 
 ---------------------------------------------
 
-I have seen some interest in the RC2014 community for the ZX81 where attempts have been made to add a ZX81 module containing a ZX81 ULA to the system, the status of that work is not clear at the moment. I will try to find out more information about this.
+I have seen some interest in the RC2014 community for the ZX81 where attempts have been made to add a ZX81 module containing a ZX81 ULA to the system, the status of that work is not clear to me at the moment. I will try to find out more information about this.
 
 ---------------------------------------------  
 # 3-8-2025: PCB has been ordered from JLCPCB  
 
 After receiving the PCB I will work on assembly and testing.
-I will document the assembly and programming process here so it could possibly be repeated by enthusiasts who are able to do this type of work with the information I am providing here.
+
+I will document the assembly and programming process here in more detail so it could possibly be repeated by enthusiasts who are able to do this type of PCB assembly/programming work with the information I am providing here.
 
 Kind regards,
 
