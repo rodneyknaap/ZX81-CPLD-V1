@@ -52,7 +52,6 @@ Update 26-4-2025 to REV0 quartus project zip:
 - tested more extensively, wrote a few demo programs in BASIC
 - tested on a CRT TV converted to monitor to check SYNC, LOAD and SAVE display if this is showing correctly, which it is
 REV0 is now reasonably well tested
-![The_PCB_rev_0_design_in_progress](ZX81_Issue5_Rev0_Progress.png)
 ---------------------------------------------
 Update 2-5-2025 to quartus package "002_ZX81_CPLD_CHR$128_WORKING@.zip":
 - CHR$128 is fully working
@@ -111,9 +110,6 @@ These devices all can be mapped into the ZX81 I/O map for future developers, inc
 After confirming basic operation of the PCB, I will map all the devices in ZX81 mode and check that they don't interfere with the ZX81 operation
 
 ---------------------------------------------
-![The updated PCB layout after adding some CP/M devices](ZX81_CPM_PCB.png)
-
----------------------------------------------
 
 The CP/M environment is able to be controlled from a USB cable using any PC and terminal software like putty.
 In the CP/M environment it's my intention to make a mechanism possible to load the ZX81 RAM contents, and then reset the system and switch back to running in ZX81 mode.
@@ -135,20 +131,6 @@ I will share as much relevant and useful information as I am able to here in the
 Don't build this unless you are confident of your own skills and debugging ability to be able to achieve this independently.  
 
 For the ZX81 ROM we can use a standard 8KB ZX81 ROM as found on the internet. Placing three jumpers on J30 selects the lowest bank on the W27C512.  
-
-![Top view of the PCB](ZX81_Issue5_Rev1_CMP1.png)  
-
-A picture of the ZX81 Issue 5 PCB
-
----------------------------------------------
-
-![Bottom view of the PCB](ZX81_Issue5_Rev1_back_cmp1.png)  
-
-The reverse side of the PCB showing the bottom SMD components.
-(The bottom silkscreen would cause the PCB manufacturing to be much more expensive, so I have created a PDF printout where the references and values are printed.
-So the bottom printout has been optimized for this purpose, which will obscure some of the bottom silkscreen because in the PDF it is printed in the pad location for clarity.)
-
----------------------------------------------
 
 Please note the following things: 
 - the design set can be downloaded, please see all the files named "Issue5 REV 1" for the entire project set
