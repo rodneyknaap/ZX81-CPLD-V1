@@ -46,8 +46,9 @@ One of the next goals of this recent ZX81 work is to be able to run CP/M on this
 ---------------------------------------------  
 # The ZX81 video display system  
 
-![ZX81/ZX97 video timing diagram based on Wilfs explanation](ZX81_ZX97_video_timing.png)
-According to Wilfs explanation we have these timing instances:  
+![ZX81/ZX97 video timing diagram based on Wilfs explanation](ZX81_ZX97_video_timing.png)  
+
+According to Wilfs explanation we have these timing instances as indicated in the diagram above:  
 
 1. Each character code (CHR$) byte in DFILE is addressed by the CPU PC, on
 the
@@ -109,10 +110,16 @@ Initial CPLD block design schematic example used for testing purposes, including
 - separation resistors on ZX81 ROM and RAM chip enable signals allow external disabling of ZX81 memory if needed
 - speaker output pin present on CPLD using a transistor output stage, supports sound experimentation and development by connecting a speaker
 
-Any hardware currently on the PCB is also possible to be used directly in ZX81 mode if so configured inside the CPLD.
+NB: Any hardware currently on the PCB is also possible to be used directly in ZX81 mode if so configured inside the CPLD.
+Using any hardware in ZX81 mode is currently somewhat limited because of the operation needing to be included into the ZX81 ROM which is complicated.
+Using the devices in CP/M mode has mostly been developed in the RC2014 community so this establishes a base operation level from which further development can be done.  
 
-Status of this design: development concept for manufacturing purposes only, unverified and under test/further development. 
-PCB is ordered from JLCPCB. (3-8-2025)
+#  Status of this design:  
+Development concept for manufacturing purposes only, unverified and under test/further development. 
+Use any information only at your own risk and responsibility.
+
+PCB has been ordered from JLCPCB. (3-8-2025)
+Gerber files, schematic and quartus CPLD examples are provided here.
 
 ---------------------------------------------
 
@@ -128,8 +135,6 @@ Possibly, ZX81 program development could even be done from within the CP/M envir
 
 ---------------------------------------------
 
-My purpose is sharing my work openly with everyone who is interested, however I don't have time for doing interactive support for other builders who also like to repeat this work.  
-
 I will share as much relevant and useful information as I am able to here in the project page.  
 It is advised to build this project only if you are confident of your own skills and debugging ability to be able to achieve this independently.  
 
@@ -137,11 +142,11 @@ For the ZX81 ROM we can use a standard 8KB ZX81 ROM file as found on the interne
 I will look at the autostart function how to modify the ZX81 ROM to allow the ZX81 to come out of RESET and not erasing the RAM.
 
 Please note the following things: 
-- the design files can be downloaded, please see all the files named "Issue5 REV 1D" for the latest version of the entire project set
+- the design files can be downloaded, please see all the files named "Issue5 REV 1D" for the latest versions of the entire project set
 - nothing is verified yet, if anyone builds this project they should only do this if they are confident to be able to solve any problems for themselves.
-After I have had time to build and verify this design myself I will update the relevant information here.
-- the quartus project is only a first draft before any testing and development is done
-- the quartus CPLD programming will be under development and subject to lots of changes for a certain period after I build the REV1D PCB. I will update information about the test and development findings here at the bottom of the page.
+After I have had time to build and verify this design myself I will update a lot of relevant information here.
+- the quartus project is a first draft before any testing and development has been done, subject to lots of changes for a certain period after I build the REV1D PCB.
+- I will update information about the test and development findings here at the bottom of the page.
 
 ---------------------------------------------
 ![Top view of the PCB](ZX81_ISSUE5_REV1D.png)  
