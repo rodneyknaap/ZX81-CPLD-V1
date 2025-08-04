@@ -59,7 +59,7 @@ Update 2-5-2025 to quartus package "002_ZX81_CPLD_CHR$128_WORKING@.zip":
 - reworked the timing inside the CPLD according to Wilf Rigters ZX97 explanation
 - done more work on analog tape input circuits to support safe line level amplitude loading of programs using the CPLD
 ![ZX81/ZX97 video timing diagram based on Wilfs explanation](ZX81_ZX97_video_timing.png)
-According to Wilf explanation we have these timing instances:
+According to Wilfs explanation we have these timing instances:
 
 1. Each character code (CHR$) byte in DFILE is addressed by the CPU PC, on
 the
@@ -91,110 +91,70 @@ and the ROW counter is incremented.
    video routine, turns on the NMI latch and switches back to the
    application code. 
 ---------------------------------------------
-The ZX81 CPLD quartus schematics are currently including CHR$128 support:
+The ZX81 CPLD quartus schematics, initial example version including CHR$128 support:
 
 ![The current CPLD schematic including CHR$128 UDG support](ZX81_CPLD_schematic_including_CHR$128_support.gif)
 ---------------------------------------------
-Update 5-5-2025:
-I have added CP/M memory management and the following devices (so far) to the PCB:
+Feature list:
+- internal power switch
 - 512KB ROM for ROMWBW HBIOS and CP/M
-- 1MB of dedicated SRAM for running CP/M
-- 128KB SRAM chip and 27C256 socket for the ZX81 RAM and ROM
-- Floppy drive controller
+- 1,5MB of dedicated SRAM for running CP/M
+- ZX81 ROM is 64KB W27C512 chip, which amounts to 8x the ZX81 ROM size, 3 jumper positions available on the PCB for selection of the ROM page
+- 128KB SRAM chip supporting ZX81 display, MA14, MA15 and MA16 on the ZX RAM are possible to be generated with the CPLD to support memory paging operation, swapping 16KB pages of RAM
+- all of the memory chip enables are output by the CPLD so these are reconfigurable
+- HD floppy drive controller (freely configurable port addresses of the FDC chip in ZX81 mode and CP/M mode)
 - PPIDE interface
-- ACIA serial commmunications adapter
-- USB to Serial input for PC
-- RTC chip Dallas
+- ACIA serial commmunications
+- USB to Serial CP/M console input for PC connects with the ACIA
+- serial RTC chip Dallas
+- Wilf Rigters PZ97 port using a 8255 and parallel port connector
+- PZ97 8255 Port B connects to separate header including power pins at back of case for custom I/O development
+- power output header inside case for powering drives
+- CH375 universal USB controller chip with a USB A socket at back right of the case
+- tape I/O at line level, 2V amplitude ZX81 tape loading using a 2 stage transistor circuit, fully verified
+- FCLOCK input on the global clock input pin of the CPLD for providing a faster clock source for development purposes
+- 7.3728MHz oscillator connected to CPLD input for CP/M mode standard clock frequency
+- 16MHz oscillator for FDC could be supplied to FCLOCK with a jumper for clocking the CPU or other circuits at higher speeds
+- NE555 timer onboard, generates low frequency timing pulses
+- self RESET function present in the CPLD, RESET period will be defined by choosing NE555 timer RC component values
+- clock pulse to the expansion connector is able to be generated completely independently from the CPU clock to support any type of expansion clock speed
+- separation resistors on ZX81 ROM and RAM chip enable signals allow external disabling of ZX81 memory if needed
+- speaker output pin present on CPLD using a transistor output stage, supports sound experimentation and development by connecting a speaker
 
-These devices all can be mapped into the ZX81 I/O map for future developers, including the RAM and bank switching memory currently used by CP/M
-After confirming basic operation of the PCB, I will map all the devices in ZX81 mode and check that they don't interfere with the ZX81 operation
+Any hardware currently on the PCB is also possible to be used directly in ZX81 mode if so configured inside the CPLD.
+
+Status of this design: development concept for manufacturing purposes only, unverified and under test/further development. 
+PCB is ordered from JLCPCB. (3-8-2025)
 
 ---------------------------------------------
 
-The CP/M environment is able to be controlled from a USB cable using any PC and terminal software like putty.
-In the CP/M environment it's my intention to make a mechanism possible to load the ZX81 RAM contents, and then reset the system and switch back to running in ZX81 mode.
-Possibly, ZX81 program development could be done from within the CP/M environment and this allows access to the ZX81 for testing. When switching back from CP/M to ZX81 mode, the ZX81 memory map is able to be fully featured using RAM only, shadowing the ZX81 ROM, which also allows for experimentation using modified or other ROM software in ZX81 mode.
-Hopefully this could provide more freedom for experimentation in software and hardware.
+# CP/M  
+
+For further information about CP/M, please refer to the RC2014/ROMWBW project. 
+The CP/M environment is able to be controlled from a USB cable using any computer with USB ports and terminal software like putty.
+
+In the CP/M environment it's my intention/idea to make a mechanism possible to load the ZX81 RAM contents, and then reset the system and switch back to running in ZX81 mode.
+In ZX81 mode, the software in memory is then executed starting from the Z80 exiting the RESET state.
+
+Possibly, ZX81 program development could even be done from within the CP/M environment and this allows direct access to the ZX81 for testing. When switching back from CP/M to ZX81 mode, the ZX81 memory map would for example be able to be fully featured using RAM only, shadowing the ZX81 ROM, which also allows for experimentation using modified or different ROM software in ZX81 mode. Hopefully this could provide more freedom for experimentation in software and hardware.
 
 ---------------------------------------------
-
-# Update 18-5-2025
-The schematic and dual-layer PCB layout are now finished.  
-
-Please refer to the files named ZX81_ISSUE_5_REV1 for the relevant information used to develop the design, which will include a copy of the quartus project used as a basis.  
-
-Status of this design: development concept for manufacturing purposes only, unverified and under test/further development!  
 
 My purpose is sharing my work openly with everyone who is interested, however I don't have time for doing interactive support for other builders who also like to repeat this work.  
 
 I will share as much relevant and useful information as I am able to here in the project page.  
-Don't build this unless you are confident of your own skills and debugging ability to be able to achieve this independently.  
+It is advised to build this project only if you are confident of your own skills and debugging ability to be able to achieve this independently.  
 
-For the ZX81 ROM we can use a standard 8KB ZX81 ROM as found on the internet. Placing three jumpers on J30 selects the lowest bank on the W27C512.  
+For the ZX81 ROM we can use a standard 8KB ZX81 ROM file as found on the internet. Placing three jumpers on J30 selects the lowest bank on the W27C512.  
+I will look at the autostart function how to modify the ZX81 ROM to allow the ZX81 to come out of RESET and not erasing the RAM.
 
 Please note the following things: 
-- the design set can be downloaded, please see all the files named "Issue5 REV 1" for the entire project set
-- nothing is verified, if anyone builds this project they should only do this if they are confident to be able to solve any problems for themselves. After I have had time to build and verify this design myself I will update the relevant information here.
-- the quartus project is a first draft which is in the current condition before any testing is done
-- the quartus CPLD programming will be under development and subject to lots of changes after I build the REV1 PCB with the goal to develop a higher level of interaction between the ZX81 hardware and the CP/M operating system
+- the design files can be downloaded, please see all the files named "Issue5 REV 1D" for the latest version of the entire project set
+- nothing is verified yet, if anyone builds this project they should only do this if they are confident to be able to solve any problems for themselves.
+After I have had time to build and verify this design myself I will update the relevant information here.
+- the quartus project is only a first draft before any testing and development is done
+- the quartus CPLD programming will be under development and subject to lots of changes for a certain period after I build the REV1D PCB. I will update information about the test and development findings here at the bottom of the page.
 
-I will confirm a version of quartus programming after I have a fully built PCB for testing and have had sufficient time to establish a certain level of basic functionality according to the initial design as created. 
-
-After establishing a basic level of functionality and mode switching between ZX81 and CP/M mode, the functionality can be developed to a much higher degree. Since a CPLD is at the core of this computer, everything can be reprogrammed such as:
-- supported devices connected in ZX81 mode
-- IO port numbers can be chose separately in CP/M mode and ZX81 mode if needed
-- memory paging system of ROMWBW could be extended into ZX81 mode support
-- the 128KB SRAM used for ZX81 memory can be enabled with software development to support 128KB in ZX81 mode
-- cycle decoding state machine could be created to differentiate between ZX81 video display generation and normal processing
-- the state machine could then be used to switch the Z80 CPU to a higher clock speed in ZX81 mode
-
-The idea is that we can boot CP/M using ROMWBW, and CP/M offers the operating system and file system. Software can be developed in CP/M to load the ZX81 RAM contents from a file in CP/M, and then mode switch back to ZX81 mode and run the software from there. A further plan is to be able to return to ZX81 mode after setting a register bit, which enables the entire Z80 memory map to be filled with the SRAM. The ROM section can be preloaded into RAM in order to use the ZX81 ROM code, or other custom code could be loaded instead of the ZX81 ROM.
-
-A further development could be that we enable ROMWBW page mode memory in ZX81 mode as well. The entire 128KB ZX81 RAM is able to be page mapped if this is so desired, and these 8 16KB pages are all ZX81 display capable. If need be, we can also enable this with all other SRAMs on the board, which needs only to lift a few OE pins and connect them to the solder pads of the correct /RAMCE signals which are included on the PCB. I have not done this by default because it needs to be tested if this causes any problems with CP/M, which I don't expect. On the other hand, we could leave the ZX81 display memory page as-is and page map the rest of the Z80 memory range for any ZX81 program to use.
-
----------------------------------------------
-
-A few updates of what has been verified in testing on the hand wired prototype to be fully functional:
-- running the A6 to INT connection from within the CPLD
-- using external transceivers for NOP and keyboard ports
-
----------------------------------------------
-
-The PCB has been increased in size so we can fit more devices into the ZX81 case.
-Please note: the space is very tight inside a ZX81. So we will need to verify and confirm that everything is able to fit and be connected as designed. Especially underneath the keyboard area for example, there is only limited height of components able to fit. Connecting the floppy drive flatcable may need some improvisation as well, for example.
-
----------------------------------------------
-
-Further additions are now included:
-- Wilf Rigter PZ97 port using a 8255 and parallel port connector and more
-- tape save/load connector
-- USB type B UART input connector using CH340N USB to serial chip
-- power output header inside case
-- PZ97 8255 Port B connects to separate header including power pins at back of case for custom I/O development
-- CH375 universal USB controller chip added with a USB A socket at back right of the case
-- CP/M RAM is now 1,5 MB
-- CP/M ROM is 512KB, with jumper for updating from within CP/M
-- ZX81 128KB SRAM is wired for full page mapping support depending on development and CPLD configuration for how this operates
-- RESET of system is bidirectional on the CPLD, experimental and subject to testing first
-- ZX81 ROM is 64KB W27C512 chip, which amounts to 8x the ZX81 ROM size, 3 jumper positions available on the PCB for selection of the ROM page
-- tape I/O is now intended to be line level (2V amplitude) which has been verified for tape loading into the ZX81 using 2 stage transistor circuit to increase amplitude to full 5V for the serial tape load input. Save circuit will be tested and values/population of parts will be updated here.
-- we have a FCLOCK input on the CPLD for providing a faster clock source for development purposes
-- FCLOCK could be supplied with 7.3728MHz with a jumper or manually wired to 16MHz oscillator for FDC, for example
-
-Because we have the CPLD, the entire system is able to be reconfigured in many ways, if needed. This is the goal of the entire schematic to enable as many reconfiguration options as possible in the system.
-
-# Update 3-8-2025
-I have taken one last look at the whole design before ordering the PCB and made a few additional changes. Because I wanted to be able to do more things which previously were not possible because of not having enough pins on the CPLD. I exchanged the CPLD type for a 100 pin package so this added a number of additional pins, with which I have made the following additions:
-- the CPLD is now generating all memory chip selects. So the memory configuration is able to be completely changed. The external page register chips are still used because of CPLD register limitations.
-- the CPLD now outputs MA14, MA15 and MA16 to the ZX RAM chip during ZX81 mode. This means that some form of memory page swapping would be possible within the 8 available 16KB pages that the ZX SRAM contains so theoretically the ZX81 mode could make use of 128KB of SRAM.
-- the 1.5MB of CP/M memory would theoretically also be available for use in ZX81 mode if there is some application that could make use of this.
-- the clock inputs now are expanded: we have 6.5MHz for ZX81 mode display generation, 7.3728MHz for CP/M mode of the Z80, and we have the FCLOCK input which could be connected with the onboard 16MHz clock for example.
-- the clock output on the expansion port is now a separate output pin of the CPLD so basically anything is possible to be programmed to this output, so that even when the CPU is dynamically clocked, this output would be able to maintain the same clock speed throughout. Otherwise this pin could be used for custom designs on the expansion port as well since it's completely reprogrammable.
-- a 555 timer is added on the PCB. This timer will supply a lower frequency pulse to the CPLD which can be used for various purposes, one of which will be a reset timer. A new RESET circuit will allow the CPLD to apply a suitable amount of RESET time to the whole computer whenever needed, for example after loading new data into the ZX81 RAM during CP/M mode so that the program can be automatically started.
-- a speaker output has been added with a simple transistor output stage for driving a small speaker. This allows experimentation with sound such as generating tones and sound effects.
-- the secondary floppy controller I/O decoder has been moved into the CPLD. This means that the floppy drive controller chip port addresses can be reconfigured to any port address, possibly replicating an existing floppy controller for the ZX81 for which software may exist, for example.  
-
-The PCB design is finished and the PCB has been ordered from JLCPCB.
 ---------------------------------------------
 ![Top view of the PCB](ZX81_ISSUE5_REV1D.png)  
 
@@ -203,23 +163,13 @@ The PCB design is finished and the PCB has been ordered from JLCPCB.
 
 ---------------------------------------------
 
-# Future concepts and potential functionality of this computer
-If software could be developed for supporting various functions in ZX81 mode, all the hardware control in the computer is able to be updated in the CPLD for offering more and more devices to be used in ZX81 mode, which can be done at alternate IO ports in ZX81 mode if required to avoid conflicts with ZX81 operation. 
+I have seen some interest in the RC2014 community for the ZX81 where attempts have been made to add a ZX81 module containing a ZX81 ULA to the system, the status of that work is not clear at the moment. I will try to find out more information about this.
 
-I have seen some interest in the RC2014 community where attempts have been made to add a ZX81 module to the system, the status of that work is not clear at the moment.
+---------------------------------------------  
+# 3-8-2025: PCB has been ordered from JLCPCB  
 
----------------------------------------------
-
-A few things which I will test in the future:
-- performing tests with ZX81 mode enabled and disabled, testing if ZX81 can return in stable manner
-- looking at autostarting basic version of ZX81 ROM as done by Wilf Rigter in his ZX97 so that a Z80 RESET will not erase the ZX81 RAM contents
-
----------------------------------------------
-
-Please note: no prototype PCB has been built yet, so keep in mind the above warnings and remember that nothing is verified yet and this is the first revision of this new system design. I am sharing the designs in unverified state for providing interested readers an early look into the project. Deciding to build this please consider your skills and ability if you are confident to be able to do this yourself. Soldering should start with parts needed to be able to power up, erase and program the CPLD without any other parts, thus making sure that a recycled CPLD can not generate any contention with the other ICs and damage due to contention can be prevented. So any actual builder should plan such things carefully.
-Next step could be to add the ZX81 parts, programming the CPLD and placing the ZX81 mode jumper. This is an initial test to verify the ZX81 components of the computer before adding the rest. See the schematic which can give clues to which parts are needed for creating the ZX81 operations.
-
-Updates will follow as soon as I have ordered the PCB to be made and had the chance to build and test everything.
+After receiving the PCB I will work on assembly and testing.
+I will document the assembly and programming process here so it could possibly be repeated by enthusiasts who are able to do this type of work with the information I am providing here.
 
 Kind regards,
 
