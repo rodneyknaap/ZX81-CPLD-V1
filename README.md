@@ -43,23 +43,11 @@ So after debugging the timing, I was able to run the CPLD based ZX81 computer fr
 
 One of the next goals of this recent ZX81 work is to be able to run CP/M on this computer as an operating system. So we will need to be able to juggle the memory decoding around in order to exchange ROM for RAM and start CP/M. I am not a programmer(yet) so I will need to look into how we can load and run CP/M. Of course, running in memory is one thing, however doing more such as CP/M DOS operations on a harddisk or floppy drive, interacting with the user etc will require a console. CP/M will be better if we have more RAM available so bank switching logic needs to be included. This require some external TTL IC registers since the CPLD is not great in terms of how many register bits you can store inside it.
 
-I have some ATF1508AS CPLD chips so this project is based on this CPLD type. We will directly solder the chip on the PCB for stability reasons. Sockets are really not so great for any computer because they are likely to introduce contact based malfunctions especially if we only can obtain low quality stuff these days.
+---------------------------------------------  
+# The ZX81 video display system  
 
----------------------------------------------
-Update 26-4-2025 to REV0 quartus project zip:
-- updated the polarity of character video stream, set default to ZX81 screen: black characters on white background
-- connected ZX81 keyboard
-- tested more extensively, wrote a few demo programs in BASIC
-- tested on a CRT TV converted to monitor to check SYNC, LOAD and SAVE display if this is showing correctly, which it is
-REV0 is now reasonably well tested
----------------------------------------------
-Update 2-5-2025 to quartus package "002_ZX81_CPLD_CHR$128_WORKING@.zip":
-- CHR$128 is fully working
-- more elaborate I/O decoding (may be removed if this breaks some games)
-- reworked the timing inside the CPLD according to Wilf Rigters ZX97 explanation
-- done more work on analog tape input circuits to support safe line level amplitude loading of programs using the CPLD
 ![ZX81/ZX97 video timing diagram based on Wilfs explanation](ZX81_ZX97_video_timing.png)
-According to Wilfs explanation we have these timing instances:
+According to Wilfs explanation we have these timing instances:  
 
 1. Each character code (CHR$) byte in DFILE is addressed by the CPU PC, on
 the
@@ -89,13 +77,13 @@ and the ROW counter is incremented.
 13. CPU returns from INT and resumes "excution" of DFILE CHR$ codes. 
 14. The process repeats 192 times and then INT routine returns to the main
    video routine, turns on the NMI latch and switches back to the
-   application code. 
+   application code.  
 ---------------------------------------------
-The ZX81 CPLD quartus schematics, initial example version including CHR$128 support:
+Initial CPLD block design schematic example used for testing purposes, including CHR$128 support:
 
 ![The current CPLD schematic including CHR$128 UDG support](ZX81_CPLD_schematic_including_CHR$128_support.gif)
----------------------------------------------
-Feature list:
+---------------------------------------------  
+# Feature list:  
 - internal power switch
 - 512KB ROM for ROMWBW HBIOS and CP/M
 - 1,5MB of dedicated SRAM for running CP/M
