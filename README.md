@@ -163,9 +163,38 @@ I have seen some interest in the RC2014 community for the ZX81 where attempts ha
 
 ![Image of ordered PCB](ZX81_Issue5_JLCPCB_ORDER.png)  
 
-After receiving the PCB I will work on assembly and testing.
+# Prototype PCB is mostly built up and debugging is progressing  
+I have built up the PCB and tested/debugged several things.  
 
-I will document the assembly and programming process here in more detail so it could possibly be repeated by enthusiasts who are able to do this type of PCB assembly/programming work using the information I am providing here.
+![Image of front of PCB](ZX81_Issue_5_Project_build.jpg)  
+
+![Image of back of PCB](ZX81_Issue_5_Project_build_back.jpg)  
+
+First I confirmed that the ZX81 mode is functional, that is all working correctly.  
+I loaded a demo program from the tape input using my PC headphone output, where I set the WAV playback volume at 100% and adjusted the headphone output to 80%, which resulted in loading a test program without any issues. CHR$128 mode is also working correctly. I didn't test the PZ97 PC<->ZX transfers which I will test later using DOS on an AT PC.  
+
+So I proceeded to test CP/M mode by removing the jumper. Also I started work on compiling a custom ROMWBW image that is setup specifically for the hardware available in the computer. After updating some logic I got HBIOS to start, and it detects all the hardware correctly. The CP/M memory system is fully working now and detects 1536KB of RAM, with the standard 512KB of ROM supported. I also added the 128KB ZX SRAM to the CP/M memory system so this should be writable after some custom software has been written for this purpose. When that is made, I will look into featuring a register bit that will modify the ZX81 memory map to be fully featured in RAM, which means that any "ROM" code can be loaded together with a ZX81 program. This also allows more freedom to modify the ZX81 ROM code for customization of programs.  
+
+I calculated the components for the 555 system timer to emit 880Hz pulses however in reality it's more around 600Hz, so I will experiment with some other parts to get the actual 880Hz working. This matches the typical speaker beep frequency of legacy PCs from the 1980s, which I feel would be cool to support.  
+
+I checked the CPLD reset timer based on the system timer going through a 4 bit counter, which currently results in a 25ms RESET pulse(roughly measured with a cheap scope), I think that is sufficient. After correcting the system timer frequency it will be a bit shorter which should be okay. RESET appears to work without issues.  
+
+I updated the CPU clock signal to switch along with CP/M mode to the typical 7.3728MHz which is also compiled in with ROMWBW and HBIOS as the CPU frequency to base timing on.  
+
+So CP/M detected the PPIDE, FDC, RTC and ACIA, and later I will see if I can modify the PZ97 port to operate as a printer port in CP/M, I need to check if the source code includes driver support for this feature.  
+
+![HBIOS initializing](ROMWBW_HBIOS_3.6.0.png)  
+
+![HBIOS messages](ROMWBW_HBIOS_MESSAGES.png)  
+
+![CP/M booted](ROMWBW_HBIOS_CPM_BOOTED.png)  
+
+
+The serial keyboard over the ACIA apparently needs /INT so this needs to be switched to disconnect /INT from A6 when CP/M is running and connect the ACIA interrupt output to the Z80.
+all the CP/M hardware detected correctly and listed in the boot messages, including the memory layout as set in the source configuration for the HBIOS.
+In the photos you can see the board in its current state, I still need to do more cleaning of the bottom layer but you can get an idea of what the board looks like when fully built.
+
+I will do a lot more tests including connecting some drives and accessing them in CP/M
 
 Kind regards,
 
